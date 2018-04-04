@@ -15,10 +15,12 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * weeksrev course format.  Display the whole course as "weeksrev" made of modules.
+ * Weeks course format. Display the whole course as "weeksrev" made of modules.
  *
  * @package format_weeksrev
- * @copyright 2006 The Open University
+ * @copyright 2018 Arnaud Trouvé <moodle@arnaudtrouve.fr>
+ *            based on code by Mat Cannings
+ *            based on code from 2006 The Open University
  * @author N.D.Freear@open.ac.uk, and others.
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -37,26 +39,16 @@ if ($week = optional_param('week', 0, PARAM_INT)) {
 }
 // End backwards-compatible aliasing..
 
-// make sure all sections are created
+// Make sure section 0 is created.
 $course = course_get_format($course)->get_course();
-course_create_sections_if_missing($course, range(0, $course->numsections));
+course_create_sections_if_missing($course, 0);
 
+$renderer = $PAGE->get_renderer('format_weeksrev');
 
-if (!$PAGE->user_is_editing()){
-	$renderer = $PAGE->get_renderer('format_weeksrev');
-	if (!empty($displaysection)) {
-		$renderer->print_single_section_page($course, $sections, $mods, $modnames, $modnamesused, $displaysection);
-	} else {
-		$renderer->print_multiple_section_page($course, $sections, $mods, $modnames, $modnamesused);
-	}
+if (!empty($displaysection)) {
+    $renderer->print_single_section_page($course, null, null, null, null, $displaysection);
 } else {
-	$renderer = $PAGE->get_renderer('format_weeks');
-
-	if (!empty($displaysection)) {
-		$renderer->print_single_section_page($course, $sections, $mods, $modnames, $modnamesused, $displaysection);
-	} else {
-		$renderer->print_multiple_section_page($course, $sections, $mods, $modnames, $modnamesused);
-	}
+    $renderer->print_multiple_section_page($course, null, null, null, null);
 }
 
 $PAGE->requires->js('/course/format/weeksrev/format.js');

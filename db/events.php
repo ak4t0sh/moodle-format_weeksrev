@@ -15,19 +15,27 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Version details
+ * Format weeksrev event handler definition.
  *
- * @package    format
- * @subpackage weeksrev
- * @copyright  2018 Arnaud Trouvé <moodle@arnaudtrouve.fr>
- *            based on code by Mat Cannings
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package format_weeksrev
+ * @copyright 2018 Arnaud Trouvé <moodle@arnaudtrouve.fr>
+ *            based on code from 2017 Mark Nelson <markn@moodle.com>
+ * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version   = 2018040700;        // The current plugin version (Date: YYYYMMDDXX).
-$plugin->requires  = 2017050500;        // Requires this Moodle version.
-$plugin->component = 'format_weeksrev';    // Full name of the plugin (used for diagnostics).
-$plugin->release = '3.0.0';
-$plugin->maturity  = MATURITY_STABLE;
+$observers = [
+    [
+        'eventname'   => '\core\event\course_updated',
+        'callback'    => 'format_weeksrev_observer::course_updated',
+    ],
+    [
+        'eventname'   => '\core\event\course_section_created',
+        'callback'    => 'format_weeksrev_observer::course_section_created',
+    ],
+    [
+        'eventname'   => '\core\event\course_section_deleted',
+        'callback'    => 'format_weeksrev_observer::course_section_deleted',
+    ]
+];

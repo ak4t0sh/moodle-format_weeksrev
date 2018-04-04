@@ -40,12 +40,14 @@
 .course-content .future {
     position: relative;
 }
-.course-content .future-legend::before,
-.course-content .future::before {
-    border-left: #e89696 2px solid;
+.course-content .future-legend::before {
     bottom: 0;
     content: "";
     left: -15px;
     position: absolute;
     top: 0;
+}
+.course-content .future-legend::before,
+.course-content .future {
+    border-left: #e89696 2px solid;
 }
