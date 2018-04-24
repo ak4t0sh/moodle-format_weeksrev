@@ -2,6 +2,7 @@ v3.1.0
 ------
 * Add new function to return the course format settings for external clients via Web Services in Moodle 3.5 and higher.  
 See [MDL-61198](https://tracker.moodle.org/browse/MDL-61198).
+* Add privacy implementation / GDPR compliance.
 
 v3.0.0
 ------
