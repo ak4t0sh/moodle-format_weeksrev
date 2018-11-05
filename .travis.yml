@@ -2,7 +2,7 @@ language: php
 
 # Workaround for fixing that Selenium server is not running and therefore javascript Behat tests are not working:
 # https://github.com/moodlerooms/moodle-plugin-ci/issues/70
-sudo: required
+sudo: true
 # ORIGINAL:
 # sudo: false
 
@@ -12,7 +12,7 @@ notifications:
 
 addons:
   firefox: "47.0.1"
-  postgresql: "9.3"
+  postgresql: "9.4"
   apt:
     packages:
       - oracle-java8-installer
@@ -24,33 +24,16 @@ cache:
     - $HOME/.npm
 
 php:
- - 5.6
  - 7.0
  - 7.1
  - 7.2
-
 env:
  matrix:
-    - DB=pgsql MOODLE_BRANCH=master
-    - DB=mysqli MOODLE_BRANCH=master
-    - DB=pgsql MOODLE_BRANCH=MOODLE_34_STABLE
-    - DB=mysqli MOODLE_BRANCH=MOODLE_34_STABLE
-    - DB=pgsql MOODLE_BRANCH=MOODLE_33_STABLE
-    - DB=mysqli MOODLE_BRANCH=MOODLE_33_STABLE
-matrix:
-    exclude:
-        - php: 5.6
-          env: DB=pgsql MOODLE_BRANCH=master
-        - php: 5.6
-          env: DB=mysqli MOODLE_BRANCH=master
-        - php: 5.6
-          env: DB=pgsql MOODLE_BRANCH=MOODLE_34_STABLE
-        - php: 5.6
-          env: DB=mysqli MOODLE_BRANCH=MOODLE_34_STABLE
-        - php: 7.2
-          env: DB=pgsql MOODLE_BRANCH=MOODLE_33_STABLE
-        - php: 7.2
-          env: DB=mysqli MOODLE_BRANCH=MOODLE_33_STABLE
+  - DB=mysqli MOODLE_BRANCH=master
+  - DB=pgsql  MOODLE_BRANCH=master
+  - DB=mysqli MOODLE_BRANCH=MOODLE_35_STABLE
+  - DB=pgsql  MOODLE_BRANCH=MOODLE_35_STABLE
+  - DB=mysqli MOODLE_BRANCH=MOODLE_34_STABLE
 
 before_install:
   - phpenv config-rm xdebug.ini
