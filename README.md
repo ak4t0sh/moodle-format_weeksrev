@@ -5,6 +5,10 @@ Overview
 --------
 This is a clone of the Moodle weekly course format except the weeks are listed in reverse order.
 
+It is a fork, compatible with **Moodle 4.0+**.
+
+Forked from: https://github.com/ak4t0sh/moodle-format_weeksrev
+
 Settings
 --------
 * Settings from standard weekly format

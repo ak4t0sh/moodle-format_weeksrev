@@ -1,3 +1,8 @@
+3.2.1
+-----
+
+* Replace deprecated `format_base` with `core_courseformat\base` for Moodle 4+
+
 3.2.0
 -----
 
