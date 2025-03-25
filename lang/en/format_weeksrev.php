@@ -23,25 +23,27 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-$string['addsections'] = 'Add weeks';
-$string['currentsection'] = 'This week';
-$string['editsection'] = 'Edit week';
-$string['editsectionname'] = 'Edit week name';
-$string['deletesection'] = 'Delete week';
-$string['futureweek'] = 'Future week (Hidden from students)';
-$string['futureweeks'] = 'Future weeks (Hidden from students)';
-$string['hidefuture'] = 'Hide future weeks';
-$string['hidefuture_help'] = 'Should the course format automatically hide future weeks until they arrive
- or let user specify the dates based on conditional access. NOTE:For conditional access highlighting will move on even if section not visible';
-$string['hidefuture_desc'] = 'Sections are hidden until week arrives.';
-$string['newsectionname'] = 'New name for week {$a}';
-$string['sectionname'] = 'Week';
-$string['pluginname'] = 'Reverse Weekly format';
-$string['section0name'] = 'General';
-$string['page-course-view-weeks'] = 'Any course main page in weeks format';
-$string['page-course-view-weeks-x'] = 'Any course page in weeks format';
-$string['hidefromothers'] = 'Hide week';
-$string['showfromothers'] = 'Show week';
-$string['automaticenddate'] = 'Calculate the end date from the number of sections';
-$string['automaticenddate_help'] = 'If enabled, the end date for the course will be automatically calculated from the number of sections and the course start date.';
-$string['privacy:metadata'] = 'The Reverse Weekly format plugin does not store any personal data.';
+$string['addsections'] = 'Dodaj tedne';
+$string['currentsection'] = 'Ta teden';
+$string['editsection'] = 'Uredi teden';
+$string['editsectionname'] = 'Uredi ime tedna';
+$string['deletesection'] = 'Izbriši teden';
+$string['futureweek'] = 'Prihodnji teden (Skrito za študente)';
+$string['futureweeks'] = 'Prihodnji tedni (Skrito za študente)';
+$string['hidefuture'] = 'Skrij prihodnje tedne';
+$string['hidefuture_help'] = 'Ali naj format predmeta samodejno skrije prihodnje tedne, dokler ne prispejo, 
+ali naj uporabnik določi datume glede na pogojni dostop. OPOMBA: Pri pogojnem dostopu bo poudarjanje napredovalo, 
+tudi če odsek ni viden.';
+$string['hidefuture_desc'] = 'Odseki so skriti, dokler teden ne prispe.';
+$string['newsectionname'] = 'Novo ime za teden {$a}';
+$string['sectionname'] = 'Teden';
+$string['pluginname'] = 'Obratni tedenski format';
+$string['section0name'] = 'Splošno';
+$string['page-course-view-weeks'] = 'Katerakoli glavna stran predmeta v tedenskem formatu';
+$string['page-course-view-weeks-x'] = 'Katerakoli stran predmeta v tedenskem formatu';
+$string['hidefromothers'] = 'Skrij teden';
+$string['showfromothers'] = 'Prikaži teden';
+$string['automaticenddate'] = 'Izračunaj končni datum glede na število odsekov';
+$string['automaticenddate_help'] = 'Če je omogočeno, se bo končni datum predmeta samodejno izračunal na podlagi števila odsekov in začetnega datuma predmeta.';
+$string['privacy:metadata'] = 'Vtičnik Obratni tedenski format ne shranjuje osebnih podatkov.';
+$string['weeklyoutline'] = 'Tedenski pregled';

@@ -39,10 +39,6 @@ code_quality:
   tags:
     - code-quality-sans
 
-phpcs-security-audit-sast:
-  rules:
-    - when: always
-
 semgrep-sast:
   rules:
     - when: always

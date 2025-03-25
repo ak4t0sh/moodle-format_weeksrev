@@ -24,11 +24,19 @@
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+namespace format_weeksrev\output;
+
+use core_courseformat\output\section_renderer;
+use core_courseformat\output\local\content\section;
+use core_courseformat\output\local\content\section\cmlist;
+use core_courseformat\output\local\content\section\availability;
+use core_courseformat\output\local\content\section\summary;
+use core_courseformat\output\local\content\addsection;
+use html_writer;
 
 defined('MOODLE_INTERNAL') || die();
-require_once($CFG->dirroot.'/course/format/renderer.php');
+require_once($CFG->dirroot.'/course/format/weeksrev/classes/output/renderer.php');
 require_once($CFG->dirroot.'/course/format/weeksrev/lib.php');
-
 
 /**
  * Basic renderer for weeksrev format.
@@ -38,7 +46,8 @@ require_once($CFG->dirroot.'/course/format/weeksrev/lib.php');
  *            based on code from 2012 Dan Poltawski
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class format_weeksrev_renderer extends format_section_renderer_base {
+class renderer extends section_renderer {
+
     /**
      * Generate the starting container html for a list of sections
      * @return string HTML to output.
@@ -59,7 +68,7 @@ class format_weeksrev_renderer extends format_section_renderer_base {
      * @return string the page title
      */
     protected function page_title() {
-        return get_string('weeklyoutline');
+        return get_string('weeklyoutline', 'format_weeksrev');
     }
 
     /**
@@ -111,18 +120,14 @@ class format_weeksrev_renderer extends format_section_renderer_base {
         }
 
         $o .= html_writer::start_tag('li', ['id' => 'section-' . $section->section,
-            'class' => 'section main clearfix' . $sectionstyle, 'role' => 'region',
+            $sectionstyle, 'role' => 'region',
             'aria-label' => get_section_name($course, $section)]);
 
         // Create a span that contains the section title to be used to create the keyboard section move menu.
         $o .= html_writer::tag('span', get_section_name($course, $section), ['class' => 'hidden sectionname']);
 
-        $leftcontent = $this->section_left_content($section, $course, $onsectionpage);
-        $o .= html_writer::tag('div', $leftcontent, ['class' => 'left side']);
-
-        $rightcontent = $this->section_right_content($section, $course, $onsectionpage);
-        $o .= html_writer::tag('div', $rightcontent, ['class' => 'right side']);
-        $o .= html_writer::start_tag('div', ['class' => 'content']);
+        $sectionoutput = new section($courseformat, $section);
+        $o .= $this->render($sectionoutput);
 
         // When not on a section page, we display the section titles except the general section if null.
         $hasnamenotsecpg = (!$onsectionpage && ($section->section != 0 || !is_null($section->name)));
@@ -134,13 +139,13 @@ class format_weeksrev_renderer extends format_section_renderer_base {
         if ($hasnamenotsecpg || $hasnamesecpg) {
             $classes = '';
         }
-        $sectionname = html_writer::tag('span', $this->section_title($section, $course));
-        $o .= $this->output->heading($sectionname, 3, 'sectionname' . $classes);
 
-        $o .= $this->section_availability($section);
+        $availability = new availability($courseformat, $section);
+        $o .= $this->render($availability);
 
         $o .= html_writer::start_tag('div', ['class' => 'summary']);
-        $o .= $this->format_summary_text($section);
+        $summary = new summary($courseformat, $section);
+        $o .= $summary->format_summary_text();
         $o .= html_writer::end_tag('div');
 
         return $o;
@@ -185,11 +190,13 @@ class format_weeksrev_renderer extends format_section_renderer_base {
         $o .= $this->output->heading($title, 3, 'section-title');
 
         $o .= html_writer::start_tag('div', ['class' => 'summarytext']);
-        $o .= $this->format_summary_text($section);
+        $summary = new summary($courseformat, $section);
+        $o .= $summary->format_summary_text();
         $o .= html_writer::end_tag('div');
         $o .= $this->section_activity_summary($section, $course, null);
 
-        $o .= $this->section_availability($section);
+        $availability = new availability($courseformat, $section);
+        $o .= $this->render($availability);
 
         $o .= html_writer::end_tag('div');
         $o .= html_writer::end_tag('li');
@@ -207,7 +214,7 @@ class format_weeksrev_renderer extends format_section_renderer_base {
      * @param int $displaysection The section number in the course which is being displayed
      */
     public function print_single_section_page($course, $sections, $mods, $modnames, $modnamesused, $displaysection) {
-        $context = context_course::instance($course->id);
+        $context = \context_course::instance($course->id);
         $canviewhidden = has_capability('moodle/course:viewhiddensections', $context);
         if ($course->hidefuture && $canviewhidden) {
             echo html_writer::tag('ul',
@@ -232,19 +239,16 @@ class format_weeksrev_renderer extends format_section_renderer_base {
         $courseformat = course_get_format($course);
         $course = $courseformat->get_course();
 
-        $context = context_course::instance($course->id);
+        $context = \context_course::instance($course->id);
         // Title with completion help icon.
-        $completioninfo = new completion_info($course);
-        echo $completioninfo->display_help_icon();
+        $completioninfo = new \completion_info($course);
+        echo $this->output->help_icon('completion', 'completion');
         echo $this->output->heading($this->page_title(), 2, 'accesshide');
-
-        // Copy activity clipboard..
-        echo $this->course_activity_clipboard($course, 0);
 
         $canviewhidden = has_capability('moodle/course:viewhiddensections', $context);
         if ($course->hidefuture && $canviewhidden) {
-            echo html_writer::tag('ul',
-                html_writer::tag('li', get_string('futureweeks', 'format_weeksrev'), ['class' => 'future-legend']),
+            echo \html_writer::tag('ul',
+                \html_writer::tag('li', get_string('futureweeks', 'format_weeksrev'), ['class' => 'future-legend']),
                 ['class' => 'weeksrev']
             );
         }
@@ -263,9 +267,6 @@ class format_weeksrev_renderer extends format_section_renderer_base {
                 // 0-section is displayed a little different then the others.
                 if ($thissection->summary or !empty($modinfo->sections[0]) or $PAGE->user_is_editing()) {
                     echo $this->section_header($thissection, $course, false, 0);
-                    echo $this->courserenderer->course_section_cm_list($course, $thissection, 0);
-                    echo $this->courserenderer->course_section_add_cm_control($course, 0, 0);
-                    echo $this->section_footer();
                 }
                 continue;
             }
@@ -295,11 +296,6 @@ class format_weeksrev_renderer extends format_section_renderer_base {
                 echo $this->section_summary($thissection, $course, null);
             } else {
                 echo $this->section_header($thissection, $course, false, 0);
-                if ($thissection->uservisible) {
-                    echo $this->courserenderer->course_section_cm_list($course, $thissection, 0);
-                    echo $this->courserenderer->course_section_add_cm_control($course, $section, 0);
-                }
-                echo $this->section_footer();
             }
         }
 
@@ -311,13 +307,12 @@ class format_weeksrev_renderer extends format_section_renderer_base {
                     continue;
                 }
                 echo $this->stealth_section_header($section);
-                echo $this->courserenderer->course_section_cm_list($course, $thissection, 0);
-                echo $this->stealth_section_footer();
             }
 
             echo $this->end_section_list();
 
-            echo $this->change_number_sections($course, 0);
+            $addsection = new addsection($courseformat);
+            echo $this->render($addsection);
         } else {
             echo $this->end_section_list();
         }
