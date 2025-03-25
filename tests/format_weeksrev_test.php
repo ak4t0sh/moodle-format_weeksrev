@@ -27,6 +27,9 @@ defined('MOODLE_INTERNAL') || die();
 
 global $CFG;
 require_once($CFG->dirroot . '/course/lib.php');
+require_once($CFG->dirroot . '/lib/external/classes/external_api.php');
+
+use core_external\external_api;
 
 /**
  * format_weeksrev related unit tests
@@ -190,7 +193,7 @@ class format_weeksrev_testcase extends advanced_testcase {
             $tmpl = component_callback('format_topics', 'inplace_editable', ['sectionname', $section->id, 'New name']);
             $this->fail('Exception expected');
         } catch (moodle_exception $e) {
-            $this->assertEquals(1, preg_match('/^Can not find data record in database/', $e->getMessage()));
+            $this->assertEquals(1, preg_match('/Can.?t find data record in database/', $e->getMessage()));
         }
     }
 
@@ -227,8 +230,7 @@ class format_weeksrev_testcase extends advanced_testcase {
         $courseform = new testable_course_edit_form(null, $args);
         $courseform->definition_after_data();
 
-        // format_weeksrev::get_section_dates is adding 2h to avoid DST problems, we need to replicate it here.
-        $enddate = $params['startdate'] + (WEEKSECS * $params['numsections']) + 7200;
+        $enddate = $params['startdate'] + (WEEKSECS * $params['numsections']);
 
         $weeksformat = course_get_format($course->id);
         $this->assertEquals($enddate, $weeksformat->get_default_course_enddate($courseform->get_quick_form()));
