@@ -19,7 +19,7 @@
  *
  * @package    format
  * @subpackage weeksrev
- * @copyright  2024 1katoda
+ * @copyright  2018 Arnaud Trouvé <moodle@arnaudtrouve.fr>
  *            based on code by Arnaud Trouvé <moodle@arnaudtrouve.fr>
  *            based on code by Mat Cannings
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -27,8 +27,8 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version   = 2025032600;        // The current plugin version (Date: YYYYMMDDXX).
-$plugin->requires  = 2024100700;        // Requires this Moodle version.
+$plugin->version   = 2019020300;        // The current plugin version (Date: YYYYMMDDXX).
+$plugin->requires  = 2017111300;        // Requires this Moodle version.
 $plugin->component = 'format_weeksrev';    // Full name of the plugin (used for diagnostics).
-$plugin->release = '3.2.1';
+$plugin->release = '3.2.0';
 $plugin->maturity  = MATURITY_STABLE;

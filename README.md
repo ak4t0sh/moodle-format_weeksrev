@@ -1,13 +1,11 @@
 moodle-format_weeksrev
 =====================
 
+[![Build Status](https://travis-ci.org/ak4t0sh/moodle-format_weeksrev.svg?branch=master)](https://travis-ci.org/ak4t0sh/moodle-format_weeksrev)
+
 Overview
 --------
 This is a clone of the Moodle weekly course format except the weeks are listed in reverse order.
-
-It is a fork, compatible with **Moodle 4.0+**.
-
-Forked from: https://github.com/ak4t0sh/moodle-format_weeksrev
 
 Settings
 --------
@@ -21,8 +19,11 @@ Installation
 Install the plugin, like any other plugin.
 See http://docs.moodle.org/en/Installing_plugins for details on installing Moodle plugins.
 
+Useful links
+---------------
+* [Bug tracker](https://github.com/ak4t0sh/moodle-format_weeksrev/issues)
+
 Contributors
 ------------
 * Original author: Mat Cannings
 * Currently maintained by Arnaud Trouvé
-* Modified for Moodle 4 by 1katoda
