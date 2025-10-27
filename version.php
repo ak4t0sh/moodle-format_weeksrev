@@ -20,6 +20,7 @@
  * @package    format
  * @subpackage weeksrev
  * @copyright  2018 Arnaud Trouvé <moodle@arnaudtrouve.fr>
+ *            based on code by Arnaud Trouvé <moodle@arnaudtrouve.fr>
  *            based on code by Mat Cannings
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
