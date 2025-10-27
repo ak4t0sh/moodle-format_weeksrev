@@ -1,3 +1,8 @@
+4.0.0
+-----
+
+* Moodle 4.5+ compatibility. Thanks to 1katoda(@1katoda), Vanja Dimkovska (@vanjadi) and Martin Božič (@bozicm).
+
 3.2.0
 -----
 
