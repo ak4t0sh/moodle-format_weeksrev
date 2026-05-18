@@ -62,5 +62,34 @@ function xmldb_format_weeksrev_upgrade($oldversion) {
 
         upgrade_plugin_savepoint(true, 2018040700, 'format', 'weeksrev');
     }
+
+    // Automatically generated Moodle v4.4.0 release upgrade line.
+    // Put any upgrade step following this.
+
+    // Automatically generated Moodle v4.5.0 release upgrade line.
+    // Put any upgrade step following this.
+
+    // Automatically generated Moodle v5.0.0 release upgrade line.
+    // Put any upgrade step following this.
+
+    // Automatically generated Moodle v5.1.0 release upgrade line.
+    // Put any upgrade step following this.
+
+    if ($oldversion < 2026051900) {
+        // Seed the new format_weeksrev/maxinitialsections setting from the global moodlecourse->maxsections
+        // for sites upgrading from a version that read the global config directly.
+        $config = get_config('format_weeksrev');
+        if (!isset($config->maxinitialsections)) {
+            $courseconfig = get_config('moodlecourse');
+            $max = (int) $courseconfig->maxsections;
+            set_config('maxinitialsections', $max ?: 52, 'format_weeksrev');
+        }
+
+        upgrade_plugin_savepoint(true, 2026051900, 'format', 'weeksrev');
+    }
+
+    // Automatically generated Moodle v5.2.0 release upgrade line.
+    // Put any upgrade step following this.
+
     return true;
 }
