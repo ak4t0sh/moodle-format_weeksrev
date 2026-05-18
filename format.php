@@ -50,10 +50,6 @@ if (!is_null($displaysection)) {
     $format->set_sectionnum($displaysection);
 }
 
-if (!empty($displaysection)) {
-    $renderer->print_single_section_page($course, null, null, null, null, $displaysection);
-} else {
-    $renderer->print_multiple_section_page($course, null, null, null, null);
-}
-
-$PAGE->requires->js('/course/format/weeksrev/format.js');
+$outputclass = $format->get_output_classname('content');
+$output = new $outputclass($format);
+echo $renderer->render($output);
