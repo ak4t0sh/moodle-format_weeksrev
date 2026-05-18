@@ -148,6 +148,20 @@ class format_weeksrev extends core_courseformat\base {
     }
 
     /**
+     * Returns true if this course format is compatible with content components.
+     *
+     * Required in Moodle 5.x: core_courseformat\output\local\content\addsection only populates its
+     * template data when supports_components() is true (or when 'numsections' is declared in the
+     * format options). Without it, addsection::export_for_template() returns null and triggers a
+     * TypeError because its return type is stdClass.
+     *
+     * @return bool
+     */
+    public function supports_components() {
+        return true;
+    }
+
+    /**
      * Loads all of the course sections into the navigation
      *
      * @param global_navigation $navigation
