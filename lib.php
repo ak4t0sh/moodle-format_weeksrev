@@ -50,6 +50,33 @@ class format_weeksrev extends core_courseformat\base {
     }
 
     /**
+     * Returns true if this course format uses the course index sidebar.
+     *
+     * @return bool
+     */
+    public function uses_course_index() {
+        return true;
+    }
+
+    /**
+     * Returns true if activities indentation is enabled for this course format.
+     *
+     * @return bool
+     */
+    public function uses_indentation(): bool {
+        return (bool) get_config('format_weeksrev', 'indentation');
+    }
+
+    /**
+     * Generate the title for this section page.
+     *
+     * @return string the page title
+     */
+    public function page_title(): string {
+        return get_string('sectionoutline');
+    }
+
+    /**
      * Returns the display name of the given section that the course prefers.
      *
      * @param int|stdClass $section Section object from database or just field section.section
@@ -89,6 +116,15 @@ class format_weeksrev extends core_courseformat\base {
             $endweekday = userdate($dates->end, $dateformat);
             return $weekday.' - '.$endweekday;
         }
+    }
+
+    /**
+     * Returns the name for the highlighted section.
+     *
+     * @return string the name for the highlighted section
+     */
+    public function get_section_highlighted_name(): string {
+        return get_string('currentsection', 'format_weeksrev');
     }
 
     /**
@@ -685,6 +721,15 @@ class format_weeksrev extends core_courseformat\base {
         $formatoptions = $this->get_format_options();
         $formatoptions['indentation'] = get_config('format_weeksrev', 'indentation');
         return $formatoptions;
+    }
+
+    /**
+     * Get the required javascript files for the course format.
+     *
+     * @return array The list of javascript files required by the course format.
+     */
+    public function get_required_jsfiles(): array {
+        return [];
     }
 }
 
