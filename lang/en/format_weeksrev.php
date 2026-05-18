@@ -28,8 +28,6 @@ $string['currentsection'] = 'This week';
 $string['editsection'] = 'Edit week';
 $string['editsectionname'] = 'Edit week name';
 $string['deletesection'] = 'Delete week';
-$string['futureweek'] = 'Future week (Hidden from students)';
-$string['futureweeks'] = 'Future weeks (Hidden from students)';
 $string['hidefuture'] = 'Hide future weeks';
 $string['hidefuture_help'] = 'Should the course format automatically hide future weeks until they arrive
  or let user specify the dates based on conditional access. NOTE:For conditional access highlighting will move on even if section not visible';
@@ -49,4 +47,3 @@ $string['indentation_help'] = 'Allow teachers, and other users with the manage a
 $string['maxinitialsections'] = 'Maximum number of sections';
 $string['maxinitialsections_help'] = 'The maximum number of sections (weeks) selectable when creating a new course.';
 $string['privacy:metadata'] = 'The Reverse Weekly format plugin does not store any personal data.';
-$string['weeklyoutline'] = 'Weekly outline';
